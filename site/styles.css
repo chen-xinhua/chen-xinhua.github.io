@@ -172,6 +172,23 @@ section {
     gap: 2rem;
 }
 
+@media (max-width: 1023px) {
+    .profile-column,
+    .content-column { display: contents; }
+    .profile-card { order: 0; }
+    .research-direction-tags { display: none; }
+    .content-column > section { margin-top: 0 !important; min-width: 0; }
+    #about { order: 1; }
+    #research-thrust { order: 2; }
+    #latest-news { order: 3; }
+    #publications { order: 4; }
+    #experience { order: 5; }
+    #educations { order: 6; }
+    #honors { order: 7; }
+    #outreach { order: 8; margin-top: 0; }
+    #contact { order: 9; }
+}
+
 @media (min-width: 1024px) {
     main .homepage-container { padding-left: clamp(64px, 6vw, 96px); }
     .profile-column .profile-image-container { max-width: 220px; }
