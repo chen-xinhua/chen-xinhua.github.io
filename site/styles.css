@@ -348,9 +348,10 @@ details summary {
 }
 
 .social-btn:focus-visible { outline: 2px solid #20757c; outline-offset: 3px; }
-.cv-icon { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 1.2rem; height: 1.25rem; }
-.cv-icon > i { font-size: 1.2rem; }
-.cv-icon::after { content: 'CV'; position: absolute; left: 50%; bottom: .12rem; transform: translateX(-50%); color: #fff; font: 700 .43rem/1 'Inter', sans-serif; letter-spacing: -.02em; }
+.profile-card .social-links { gap: .5rem; }
+.profile-card .social-btn { width: 2.25rem; height: 2.25rem; }
+.cv-label { font-size: .7rem; line-height: 1; font-weight: 700; letter-spacing: -.02em; }
+.cv-label-zh { font-size: .68rem; letter-spacing: 0; }
 .brand-icon { display: inline-block; width: 1.15rem; height: 1.15rem; background-color: currentColor; -webkit-mask: var(--brand-mask) center / contain no-repeat; mask: var(--brand-mask) center / contain no-repeat; }
 .scholar-icon { --brand-mask: url('assets/icons/googlescholar.svg'); }
 .xiaohongshu-icon { --brand-mask: url('assets/icons/xiaohongshu.svg'); width: 1.45rem; }
