@@ -1,0 +1,58 @@
+[
+  {
+    "date": "Oct. 2026",
+    "content": "Invited to serve as a <strong>reviewer for ICLR 2027</strong>.",
+    "links": [],
+    "category": "review",
+    "dateZh": "2026 年 10 月",
+    "contentZh": "受邀担任 <strong>ICLR 2027 审稿人</strong>。"
+  },
+  {
+    "date": "Sep. 2026",
+    "content": "Started my <strong>Ph.D. at Tsinghua IIIS</strong> in Computer Systems Architecture.",
+    "links": [],
+    "category": "education",
+    "dateZh": "2026 年 9 月",
+    "contentZh": "进入<strong>清华大学交叉信息研究院</strong>，攻读计算机系统结构博士学位。"
+  },
+  {
+    "date": "Jun. 2026",
+    "content": "Graduated from Fudan University as an <strong>Outstanding Graduate of Shanghai</strong>.",
+    "links": [],
+    "category": "honor",
+    "dateZh": "2026 年 6 月",
+    "contentZh": "从复旦大学毕业，获评<strong>上海市优秀毕业生</strong>。"
+  },
+  {
+    "date": "Mar. 2026",
+    "content": "Started my internship at <strong>Polar Bear Technologies</strong>, working on compilers and chip architecture.",
+    "links": [],
+    "category": "internship",
+    "dateZh": "2026 年 3 月",
+    "contentZh": "开始在<strong>北极雄芯</strong>实习，研究编译器与芯片架构。"
+  },
+  {
+    "date": "2025",
+    "content": "<strong>DPad accepted to ICLR 2026</strong>; <strong>CROPHE accepted to HPCA 2026</strong>.",
+    "links": [],
+    "category": "publication",
+    "dateZh": "2025 年 ",
+    "contentZh": "<strong>DPad 被 ICLR 2026 录用</strong>，<strong>CROPHE 被 HPCA 2026 录用</strong>。"
+  },
+  {
+    "date": "Jun. 2025",
+    "category": "internship",
+    "content": "Started my research internship at <strong>Duke CEI Center</strong>.",
+    "links": [],
+    "dateZh": "2025 年 6 月",
+    "contentZh": "开始在<strong>杜克大学 CEI 中心</strong>担任研究实习生。"
+  },
+  {
+    "date": "Mar. 2024",
+    "category": "internship",
+    "content": "Started my research internship at <strong>Shanghai Qi Zhi Institute</strong>.",
+    "links": [],
+    "dateZh": "2024 年 3 月",
+    "contentZh": "开始在<strong>上海期智研究院</strong>担任研究实习生。"
+  }
+]

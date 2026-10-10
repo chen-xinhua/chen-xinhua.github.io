@@ -1,0 +1,378 @@
+[
+  {
+    "title": "DPad: Efficient Diffusion Language Models with Suffix Dropout",
+    "category": "AI Algorithms & Systems",
+    "authors": [
+      {
+        "name": "Xinhua Chen",
+        "isSelf": true,
+        "equalContribution": true
+      },
+      {
+        "name": "Sitao Huang",
+        "equalContribution": true
+      },
+      {
+        "name": "Cong Guo",
+        "equalContribution": true,
+        "corresponding": true
+      },
+      {
+        "name": "Chiyue Wei"
+      },
+      {
+        "name": "Yintao He"
+      },
+      {
+        "name": "Jianyi Zhang"
+      },
+      {
+        "name": "Hai “Hellen” Li"
+      },
+      {
+        "name": "Yiran Chen"
+      }
+    ],
+    "venue": "ICLR 2026",
+    "year": "2026",
+    "isFirstAuthor": true,
+    "thumbnail": "assets/publications/dpad/overview.png",
+    "tags": [
+      {
+        "text": "Paper",
+        "link": "https://iclr.cc/virtual/2026/poster/10011883"
+      },
+      {
+        "text": "PDF",
+        "link": "https://openreview.net/pdf?id=0yOsSMU1eY"
+      },
+      {
+        "text": "Code",
+        "link": "https://github.com/Crys-Chen/DPad"
+      },
+      {
+        "text": "Video",
+        "link": "https://iclr.cc/virtual/2026/poster/10011883"
+      },
+      {
+        "text": "Media",
+        "link": "https://mp.weixin.qq.com/s/43x8EX8EER-68eFVCgXRew"
+      }
+    ],
+    "type": "accepted",
+    "showOnHomepage": true,
+    "featuredOrder": 1,
+    "id": "dpad",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "A training-free inference method for diffusion language models that reduces redundant suffix attention through a sliding window and distance-based suffix dropout.",
+        "headingZh": "研究概述",
+        "textZh": "DPad 是一种无需训练的扩散语言模型推理方法，通过滑动窗口和基于距离的后缀丢弃，减少后缀部分的冗余注意力计算。"
+      },
+      {
+        "heading": "Contributions (Project Lead)",
+        "text": "Led the project, proposed the suffix dropout technique to reduce interference from low-entropy suffix tokens, and independently developed the open-source codebase.",
+        "headingZh": "个人贡献（项目负责人）",
+        "textZh": "牵头项目，提出后缀丢弃方法，以减轻低熵后缀 token 的干扰，并独立开发开源代码。"
+      },
+      {
+        "heading": "Results",
+        "text": "Up to 61.4× speedup over vanilla diffusion language models at comparable accuracy on LLaDA and Dream, with compatible decoding optimizations.",
+        "headingZh": "主要结果",
+        "textZh": "在 LLaDA 和 Dream 上，结合其他解码优化，与原始扩散语言模型相比，在准确率相近的条件下最高实现 61.4 倍加速。"
+      },
+      {
+        "heading": "Highlights",
+        "text": "Received collaboration invitations from Ant Group, AMD, and Meta; covered by Synced (Jiqizhixin) and other technology media. The suffix dropout technique also informed improvements in diffusion language model training.",
+        "headingZh": "其他进展",
+        "textZh": "研究收到蚂蚁集团、AMD 和 Meta 的合作邀请，并获机器之心等科技媒体报道。后缀丢弃方法也为扩散语言模型训练的改进提供了思路。"
+      }
+    ],
+    "categoryZh": "AI 算法与系统",
+    "titleZh": "通过后缀丢弃提升扩散语言模型推理效率"
+  },
+  {
+    "title": "CROPHE: Cross-Operator Dataflow Optimization for Fully Homomorphic Encryption Accelerators",
+    "category": "Computer Architecture & Hardware Design",
+    "authors": [
+      {
+        "name": "Xinhua Chen",
+        "isSelf": true,
+        "equalContribution": true
+      },
+      {
+        "name": "Jiangbin Dong",
+        "equalContribution": true
+      },
+      {
+        "name": "Hongren Zheng"
+      },
+      {
+        "name": "Tian Tang"
+      },
+      {
+        "name": "Mingyu Gao",
+        "corresponding": true
+      }
+    ],
+    "venue": "HPCA 2026",
+    "year": "2026",
+    "isFirstAuthor": true,
+    "thumbnail": "assets/publications/crophe/overview.png",
+    "tags": [
+      {
+        "text": "Paper",
+        "link": "https://ieeexplore.ieee.org/document/11408486"
+      },
+      {
+        "text": "PDF",
+        "link": "assets/publications/crophe/paper.pdf"
+      }
+    ],
+    "type": "accepted",
+    "showOnHomepage": true,
+    "featuredOrder": 2,
+    "id": "crophe",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "An FHE accelerator combining unified processing elements with cross-operator scheduling to address memory bottlenecks through resource sharing and spatial/temporal pipelining.",
+        "headingZh": "研究概述",
+        "textZh": "CROPHE 将统一处理单元与跨算子调度结合，通过资源共享和时空流水化缓解全同态加密加速器的存储瓶颈。"
+      },
+      {
+        "heading": "Contributions",
+        "text": "Took over the project and progressively assumed leadership. Co-developed a memory-aware scheduler with loop reordering and tiling to reduce DRAM traffic and SRAM requirements; designed processing elements supporting forward/inverse NTT and MAC operations.",
+        "headingZh": "个人贡献",
+        "textZh": "接手项目并逐步承担负责人工作。与团队共同开发存储感知调度器，通过循环重排和分块减少 DRAM 访问及 SRAM 需求；设计支持正逆 NTT 和 MAC 运算的处理单元。"
+      },
+      {
+        "heading": "Results",
+        "text": "Reported 1.77×–4.86× speedup over the state-of-the-art accelerator designs evaluated in the paper.",
+        "headingZh": "主要结果",
+        "textZh": "相较论文评测的现有加速器，速度提升 1.77 至 4.86 倍。"
+      }
+    ],
+    "categoryZh": "计算机体系结构与硬件设计",
+    "titleZh": "面向全同态加密加速器的跨算子数据流优化"
+  },
+  {
+    "title": "Spec2Doc2RTL: RTL Generation from Specification with Natural Language Representation",
+    "category": "Electronic Design Automation",
+    "authors": [
+      {
+        "name": "Zihao Chen",
+        "equalContribution": true
+      },
+      {
+        "name": "Zihan Lin",
+        "equalContribution": true
+      },
+      {
+        "name": "Xinhua Chen",
+        "isSelf": true,
+        "equalContribution": true
+      },
+      {
+        "name": "Zhiyi Liu"
+      },
+      {
+        "name": "Changxu Liu"
+      },
+      {
+        "name": "Yuxuan Qiao"
+      },
+      {
+        "name": "Yifei Feng"
+      },
+      {
+        "name": "Junjie Zuo"
+      },
+      {
+        "name": "Yifan Song"
+      },
+      {
+        "name": "Fan Yang",
+        "corresponding": true
+      }
+    ],
+    "venue": "ISEDA 2025",
+    "year": "2025",
+    "isFirstAuthor": true,
+    "tags": [
+      {
+        "text": "Paper",
+        "link": "https://ieeexplore.ieee.org/abstract/document/11101140"
+      },
+      {
+        "text": "PDF",
+        "link": "assets/publications/spec2doc2rtl/paper.pdf"
+      }
+    ],
+    "type": "accepted",
+    "showOnHomepage": true,
+    "featuredOrder": 3,
+    "thumbnail": "assets/publications/spec2doc2rtl/overview.png",
+    "id": "spec2doc2rtl",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "A two-stage framework that translates specifications into RTL through natural-language design documents, using hierarchical decomposition and iterative feedback.",
+        "headingZh": "研究概述",
+        "textZh": "一个两阶段框架，先将规格说明转为自然语言设计文档，再通过层次化任务分解与迭代反馈生成 RTL。"
+      },
+      {
+        "heading": "Contributions",
+        "text": "Contributed to recursive task decomposition and co-developed the open-source GPT-4 Turbo-based framework with iterative feedback for design-document and RTL generation.",
+        "headingZh": "个人贡献",
+        "textZh": "参与递归任务分解方法的设计，与团队共同开发基于 GPT-4 Turbo 的开源框架，实现设计文档和 RTL 的迭代生成。"
+      },
+      {
+        "heading": "Results",
+        "text": "Achieved 78.8% zero-shot pass@1 on Revisiting VerilogEval versus 60.3% for GPT-4 Turbo (+18.5 percentage points); demonstrated RISC-V CPU and NTT generation.",
+        "headingZh": "主要结果",
+        "textZh": "在 Revisiting VerilogEval 上，零样本 pass@1 达到 78.8%，高于 GPT-4 Turbo 的 60.3%，提升 18.5 个百分点；还展示了 RISC-V CPU 和 NTT 的生成。"
+      }
+    ],
+    "categoryZh": "电子设计自动化",
+    "titleZh": "利用自然语言设计文档从规格说明生成 RTL"
+  },
+  {
+    "title": "A Unified Vector Processing Unit for Fully Homomorphic Encryption",
+    "category": "Computer Architecture & Hardware Design",
+    "authors": [
+      {
+        "name": "Jiangbin Dong"
+      },
+      {
+        "name": "Xinhua Chen",
+        "isSelf": true
+      },
+      {
+        "name": "Mingyu Gao",
+        "corresponding": true
+      }
+    ],
+    "venue": "DATE 2025",
+    "year": "2025",
+    "isFirstAuthor": false,
+    "thumbnail": "assets/publications/date/overview.png",
+    "tags": [
+      {
+        "text": "Paper",
+        "link": "https://ieeexplore.ieee.org/document/10992987"
+      },
+      {
+        "text": "PDF",
+        "link": "https://people.iiis.tsinghua.edu.cn/~gaomy/pubs/fhe_vpu.date25.pdf"
+      }
+    ],
+    "type": "accepted",
+    "showOnHomepage": true,
+    "featuredOrder": 5,
+    "id": "fhe-vpu",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "A unified FHE vector processing unit that supports NTT and automorphism operations through shared hardware and an efficient inter-lane network.",
+        "headingZh": "研究概述",
+        "textZh": "设计统一的全同态加密向量处理单元，通过共享硬件和高效的 lane 间互连支持 NTT 与自同构运算。"
+      },
+      {
+        "heading": "Contributions",
+        "text": "Contributed to decomposing automorphisms into shifts and designing the inter-lane permutation network; co-proposed the unified vector processing unit.",
+        "headingZh": "个人贡献",
+        "textZh": "参与将自同构运算分解为移位操作，并设计 lane 间置换网络；与团队共同提出统一向量处理单元。"
+      },
+      {
+        "heading": "Results",
+        "text": "Up to 9.4× area and 6.0× power savings for the inter-lane network; up to 1.2× area and 1.1× power savings for the full vector unit, relative to the designs evaluated in the paper.",
+        "headingZh": "主要结果",
+        "textZh": "相较论文比较的设计，lane 间网络的面积最多降至原来的 1/9.4，功耗降至 1/6.0；完整向量单元的面积和功耗分别降至 1/1.2 与 1/1.1。"
+      }
+    ],
+    "categoryZh": "计算机体系结构与硬件设计",
+    "titleZh": "面向全同态加密的统一向量处理单元"
+  },
+  {
+    "title": "Zero-Shot Structure-Preserving Diffusion Model for High Dynamic Range Tone Mapping",
+    "category": "AI Algorithms & Systems",
+    "authors": [
+      {
+        "name": "Ruoxi Zhu"
+      },
+      {
+        "name": "Shusong Xu"
+      },
+      {
+        "name": "Peiye Liu"
+      },
+      {
+        "name": "Sicheng Li"
+      },
+      {
+        "name": "Yanheng Lu"
+      },
+      {
+        "name": "Dimin Niu"
+      },
+      {
+        "name": "Zihao Liu"
+      },
+      {
+        "name": "Zihao Meng"
+      },
+      {
+        "name": "Li Zhiyong"
+      },
+      {
+        "name": "Xinhua Chen",
+        "isSelf": true
+      },
+      {
+        "name": "Yibo Fan",
+        "corresponding": true
+      }
+    ],
+    "venue": "CVPR 2024",
+    "year": "2024",
+    "isFirstAuthor": false,
+    "highlight": "Highlight",
+    "thumbnail": "assets/publications/hdr/overview.png",
+    "tags": [
+      {
+        "text": "Paper",
+        "link": "https://cvpr.thecvf.com/virtual/2024/poster/31000"
+      },
+      {
+        "text": "PDF",
+        "link": "https://openaccess.thecvf.com/content/CVPR2024/papers/Zhu_Zero-Shot_Structure-Preserving_Diffusion_Model_for_High_Dynamic_Range_Tone_Mapping_CVPR_2024_paper.pdf"
+      },
+      {
+        "text": "Code",
+        "link": "https://github.com/ZSDM-HDR/Zero-Shot-Diffusion-HDR"
+      }
+    ],
+    "type": "accepted",
+    "showOnHomepage": true,
+    "featuredOrder": 6,
+    "id": "hdr-tone-mapping",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "A zero-shot HDR tone-mapping method that transfers a pretrained diffusion model to HDR inputs while preserving image structure, without paired HDR/LDR training data.",
+        "headingZh": "研究概述",
+        "textZh": "将预训练扩散模型用于 HDR 输入，无需成对的 HDR/LDR 训练数据，同时保持图像结构。"
+      },
+      {
+        "heading": "Contributions",
+        "text": "Evaluated tone-mapping quality using metrics including TMQI.",
+        "headingZh": "个人贡献",
+        "textZh": "使用 TMQI 等指标评估色调映射质量。"
+      }
+    ],
+    "categoryZh": "AI 算法与系统",
+    "titleZh": "用于高动态范围色调映射的零样本结构保持扩散模型"
+  }
+]

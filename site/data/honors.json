@@ -1,0 +1,36 @@
+[
+  {
+    "date": "2026",
+    "title": "Outstanding Graduate of Shanghai",
+    "description": "7 of 137 students",
+    "org": "Shanghai Municipal Education Commission · 7 of 137 students",
+    "logo": "assets/honors/shanghai-education.png",
+    "logoAlt": "Shanghai Education website emblem",
+    "titleZh": "上海市优秀毕业生",
+    "descriptionZh": "137 名学生中获评 7 人",
+    "logoAltZh": "上海市教育委员会徽标"
+  },
+  {
+    "date": "2022",
+    "title": "Xu Zengshou Scholarship",
+    "description": "1 of approximately 130 students",
+    "org": "Fudan University · 1 of approximately 130 students",
+    "logo": "assets/schools/fudan-slide.png",
+    "logoAlt": "Fudan University emblem",
+    "titleZh": "徐增寿奖学金",
+    "descriptionZh": "约 130 人中获评 1 人",
+    "logoAltZh": "复旦大学校徽"
+  },
+  {
+    "date": "2022",
+    "title": "National Second Prize, National Mathematical Contest in Modeling (HEP Cup)",
+    "org": "China Society for Industrial and Applied Mathematics",
+    "logo": "assets/honors/cumcm.png",
+    "logoAlt": "CUMCM logo",
+    "link": "https://www.mcm.edu.cn/",
+    "description": "1,146 of 49,424 teams nationwide<br>4 of 209 at Fudan",
+    "titleZh": "全国大学生数学建模竞赛全国二等奖",
+    "descriptionZh": "全国 49,424 支队伍中，1,146 支获二等奖<br>复旦大学 209 支队伍中，4 支获二等奖",
+    "logoAltZh": "全国大学生数学建模竞赛标志"
+  }
+]
