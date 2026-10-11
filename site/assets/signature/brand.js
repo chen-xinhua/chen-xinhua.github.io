@@ -26,7 +26,7 @@
         current = -1;
         engine.draw(current);
         const step = now => {
-          current = now - start;
+          current = (now - start) * 2;
           engine.draw(current);
           if (current < engine.total + 20) frame = requestAnimationFrame(step);
         };

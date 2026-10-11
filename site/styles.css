@@ -58,6 +58,10 @@ a {
 .signature-brand.is-animated img { opacity: 0; }
 .signature-brand.is-animated canvas { opacity: 1; }
 
+@media (min-width: 1024px) {
+    .top-nav .nav-container { padding-left: clamp(64px, 6vw, 96px); }
+}
+
 @media (max-width: 1023px) {
     .signature-brand { width: 124px; height: 59px; }
 }
