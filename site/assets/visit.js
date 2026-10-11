@@ -4,12 +4,33 @@
   const endpoint = 'https://xinhua-visitor-tracker.pages.dev/collect';
   if (!endpoint.startsWith('https://')) return;
 
+  const count = document.getElementById('visit-count');
+  async function showTotal() {
+    if (!count) return;
+    try {
+      const response = await fetch('https://xinhua-visitor-tracker.pages.dev/total', {
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+      });
+      if (!response.ok) throw new Error('Count unavailable');
+      const { total } = await response.json();
+      if (!Number.isSafeInteger(total) || total < 0) throw new Error('Invalid count');
+      count.textContent = total.toLocaleString('en-US');
+    } catch {
+      count.textContent = '—';
+    }
+  }
+
   const key = 'xinhua-visit-last-v1';
   const now = Date.now();
   const sessionLength = 30 * 60 * 1000;
   try {
     const previous = Number(localStorage.getItem(key));
-    if (previous && now - previous < sessionLength) return;
+    if (previous && now - previous < sessionLength) {
+      void showTotal();
+      return;
+    }
     localStorage.setItem(key, String(now));
   } catch {
     // Storage can be unavailable in private browsing; still record the visit.
@@ -30,5 +51,5 @@
     } catch {
       // Nothing visible should change when analytics is unavailable.
     }
-  });
+  }).finally(showTotal);
 })();
