@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&family=Kaushan+Script&family=Pacifico&display=swap');
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
@@ -38,28 +38,45 @@ a {
 }
 
 .signature-brand {
+    --brand-ink-color: #1e293b;
     display: inline-flex;
+    position: relative;
     align-items: center;
-    gap: 8px;
+    gap: 14px;
     height: 64px;
     flex-shrink: 0;
     text-decoration: none;
 }
 
 .signature-brand-name {
-    color: #1e293b;
-    font-family: 'Kaushan Script', cursive;
-    font-size: 27px;
+    display: inline-block;
+    color: var(--brand-ink-color);
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 29px;
     line-height: 1;
     white-space: nowrap;
+    transform: translateY(2px);
 }
+
+.signature-brand-name-canvas { display: none; width: 0; height: 0; }
+.signature-brand.is-animated .signature-brand-name { visibility: hidden; }
+.signature-brand.is-animated .signature-brand-name-canvas { display: block; position: absolute; left: 0; top: 50%; width: 150px; height: 33px; }
+.signature-brand.is-animated .signature-brand-name-canvas { filter: drop-shadow(.6px 0 #1e293b) drop-shadow(-.3px 0 #1e293b); }
+.signature-brand-lockup-canvas { display: none; }
+.signature-brand.is-lockup { width: auto; gap: 14px; height: 64px; }
+.signature-brand.is-lockup-pending .signature-brand-name,
+.signature-brand.is-lockup-pending .signature-brand-name-canvas,
+.signature-brand.is-lockup-pending .signature-brand-ink { visibility: hidden; }
+.signature-brand.is-lockup-pending .signature-brand-lockup-canvas { display: none; }
+.signature-brand.is-lockup .signature-brand-lockup-canvas { display: none; }
 
 .signature-brand-ink {
     position: relative;
     display: block;
-    width: 100px;
-    height: 48px;
+    width: 124px;
+    height: 59px;
     flex-shrink: 0;
+    transform: translateY(2px);
 }
 
 .signature-brand-ink img,
@@ -69,19 +86,54 @@ a {
     display: block;
     width: 100%;
     height: 100%;
+    filter: var(--signature-filter, drop-shadow(.55px 0 #1e293b) drop-shadow(-.35px 0 #1e293b));
 }
 
 .signature-brand canvas { opacity: 0; }
 .signature-brand.is-animated img { opacity: 0; }
 .signature-brand.is-animated canvas { opacity: 1; }
 
+body[data-brand-font="kaushan"] .signature-brand-name { font-family: 'Kaushan Script', cursive; font-size: 29px; }
+body[data-brand-font="berkshire"] .signature-brand-name { font-family: 'Berkshire Swash', cursive; font-size: 29px; }
+body[data-brand-font="dancing"] .signature-brand-name { font-family: 'Dancing Script', cursive; font-size: 34px; }
+body[data-brand-font="pacifico"] .signature-brand-name { font-family: 'Pacifico', cursive; font-size: 26px; }
+
+.brand-font-picker { display: none; position: fixed; right: 18px; bottom: 18px; z-index: 80; font-family: 'Inter', sans-serif; }
+.brand-font-picker-toggle { border: 1px solid #a9c9c9; border-radius: 999px; background: #fff; color: #31545b; padding: 9px 16px; box-shadow: 0 4px 18px #1e293b1a; cursor: pointer; font-weight: 600; }
+.brand-font-picker-options { position: absolute; right: 0; bottom: calc(100% + 10px); width: min(300px, calc(100vw - 28px)); padding: 14px; border: 1px solid #cadcdc; border-radius: 14px; background: #fff; box-shadow: 0 12px 32px #1e293b26; }
+.brand-font-picker-options[hidden] { display: none; }
+.brand-font-picker-options p { margin: 0 0 8px; color: #64748b; font-size: 13px; }
+.brand-font-picker-options button { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 9px 10px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: #31545b; cursor: pointer; text-align: left; }
+.brand-font-picker-options button:hover, .brand-font-picker-options button[aria-pressed="true"] { border-color: #a9c9c9; background: #f2f8f8; }
+.brand-font-picker-options small { flex: none; color: #64748b; font-size: 11px; }
+.brand-font-sample { font-size: 21px; white-space: nowrap; }
+.brand-font-kaushan { font-family: 'Kaushan Script', cursive; }
+.brand-font-berkshire { font-family: 'Berkshire Swash', cursive; }
+.brand-font-dancing { font-family: 'Dancing Script', cursive; font-weight: 700; }
+.brand-font-pacifico { font-family: 'Pacifico', cursive; font-size: 18px; }
+.signature-tuning { margin-top: 12px; border-top: 1px solid #e2eeee; padding-top: 10px; }
+.signature-tuning-title { margin: 0 0 7px !important; color: #31545b !important; font-size: 12px !important; font-weight: 700; }
+.signature-tuning label { display: grid; grid-template-columns: 1fr 32px; gap: 5px 8px; align-items: center; margin: 7px 0; color: #64748b; font-size: 12px; }
+.signature-tuning output { color: #31545b; font-variant-numeric: tabular-nums; text-align: right; }
+.signature-tuning input { grid-column: 1 / -1; width: 100%; accent-color: #397b80; }
+.signature-tuning-save { margin-top: 5px; border: 1px solid #9fc9ca; border-radius: 999px; background: #f5fbfb; color: #236f75; padding: 5px 10px; font-size: 11px; cursor: pointer; }
+.signature-tuning-save:hover { background: #e9f5f5; }
+.signature-tuning-saved { margin-left: 7px; color: #397b80; font-size: 11px; }
+
 @media (min-width: 1024px) {
     .top-nav .nav-container { padding-left: clamp(64px, 6vw, 96px); }
 }
 
 @media (max-width: 1023px) {
-    .signature-brand-name { font-size: 22px; }
-    .signature-brand-ink { width: 84px; height: 40px; }
+    .signature-brand { gap: 12px; }
+    .signature-brand-name { font-size: 24px; }
+    .signature-brand-ink { width: 100px; height: 48px; }
+    .signature-brand.is-animated .signature-brand-name-canvas { top: 50%; width: 130px; height: 28px; }
+    .signature-brand.is-lockup { width: auto; height: 64px; }
+    body[data-brand-font="kaushan"] .signature-brand-name { font-size: 24px; }
+    body[data-brand-font="berkshire"] .signature-brand-name { font-size: 24px; }
+    body[data-brand-font="dancing"] .signature-brand-name { font-size: 27px; }
+    body[data-brand-font="pacifico"] .signature-brand-name { font-size: 21px; }
 }
 
 .nav-links {

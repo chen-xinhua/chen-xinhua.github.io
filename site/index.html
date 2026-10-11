@@ -9,19 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/tailwind.css?v=20261011-bilingual-brand">
-    <link rel="stylesheet" href="styles.css?v=20261011-bilingual-brand">
+    <link rel="stylesheet" href="styles.css?v=20261011-signature-navy">
 </head>
-<body class="bg-background text-foreground antialiased font-sans">
+<body class="bg-background text-foreground antialiased font-sans" data-brand-font="dancing">
     <nav class="top-nav glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="nav-container max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 xl:h-20">
                 <div class="flex-shrink-0">
-                    <a href="#" class="signature-brand" aria-label="Xinhua Chen, back to top">
+                    <a href="#" class="signature-brand is-lockup-pending" aria-label="Xinhua Chen, back to top">
                         <span class="signature-brand-name" aria-hidden="true">Xinhua Chen</span>
+                        <canvas class="signature-brand-name-canvas" aria-hidden="true"></canvas>
                         <span class="signature-brand-ink" aria-hidden="true">
-                            <img src="assets/signature/signature.svg" alt="" width="800" height="380">
+                            <img src="assets/signature/signature.svg?v=20261011-signature-navy" alt="" width="800" height="380">
                             <canvas></canvas>
                         </span>
+                        <canvas class="signature-brand-lockup-canvas" aria-hidden="true"></canvas>
                     </a>
                 </div>
 
@@ -63,6 +65,29 @@
             </div>
         </div>
     </nav>
+
+    <div class="brand-font-picker" aria-label="Preview English name fonts">
+        <button class="brand-font-picker-toggle" type="button" aria-expanded="false" aria-controls="brand-font-picker-options">字体方案</button>
+        <div class="brand-font-picker-options" id="brand-font-picker-options" hidden>
+            <p>选择英文名字字体</p>
+            <button type="button" data-brand-font-option="kaushan" aria-pressed="false"><span class="brand-font-sample brand-font-kaushan">Xinhua Chen</span><small>A · Kaushan Script</small></button>
+            <button type="button" data-brand-font-option="berkshire" aria-pressed="false"><span class="brand-font-sample brand-font-berkshire">Xinhua Chen</span><small>B · Berkshire Swash</small></button>
+            <button type="button" data-brand-font-option="dancing" aria-pressed="true"><span class="brand-font-sample brand-font-dancing">Xinhua Chen</span><small>C · Dancing Script</small></button>
+            <button type="button" data-brand-font-option="pacifico" aria-pressed="false"><span class="brand-font-sample brand-font-pacifico">Xinhua Chen</span><small>D · Pacifico</small></button>
+            <div class="signature-tuning" aria-label="调整签名">
+                <p class="signature-tuning-title">签名微调</p>
+                <label>英文大小 <output data-signature-value="en-size">157</output><input type="range" min="100" max="220" value="157" data-signature-control="en-size"></label>
+                <label>英文横向比例 <output data-signature-value="en-width">102%</output><input type="range" min="85" max="125" value="102" data-signature-control="en-width"></label>
+                <label>中文大小 <output data-signature-value="zh-size">140</output><input type="range" min="90" max="140" value="140" data-signature-control="zh-size"></label>
+                <label>中英文间隔 <output data-signature-value="gap">17</output><input type="range" min="0" max="24" value="17" data-signature-control="gap"></label>
+                <label>英文上下 <output data-signature-value="en-y">0</output><input type="range" min="-8" max="8" value="0" data-signature-control="en-y"></label>
+                <label>中文上下 <output data-signature-value="zh-y">-1</output><input type="range" min="-8" max="8" value="-1" data-signature-control="zh-y"></label>
+                <label>墨迹粗细 <output data-signature-value="weight">0.3</output><input type="range" min="0" max="2" step="0.1" value="0.3" data-signature-control="weight"></label>
+                <button type="button" class="signature-tuning-save" data-signature-save>保存当前设置</button>
+                <span class="signature-tuning-saved" data-signature-saved role="status" aria-live="polite"></span>
+            </div>
+        </div>
+    </div>
 
     <main class="min-h-screen pt-20 lg:pt-28 pb-12">
         <div class="homepage-container w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -171,7 +196,7 @@
                             <h2 class="text-2xl font-sans font-semibold text-primary">About Me</h2>
                         </div>
                         <div class="prose max-w-none text-neutral-600 text-left formal-font">
-                            <p class="mb-4">I am a first-year Ph.D. student at <a class="link-highlight" href="https://group.iiis.tsinghua.edu.cn/~maks/"><img class="institution-icon" src="assets/organizations/archiplab.png" alt="" aria-hidden="true">ArchipLab</a>, <a class="link-highlight" href="https://iiis.tsinghua.edu.cn/"><img class="institution-icon" src="assets/organizations/iiis.png" alt="" aria-hidden="true">Institute for Interdisciplinary Information Sciences (IIIS)</a>, <a class="link-highlight" href="https://www.tsinghua.edu.cn/"><img class="institution-icon" src="assets/schools/tsinghua-slide.png" alt="" aria-hidden="true">Tsinghua University</a>, advised by <a class="link-highlight" href="https://iiis.tsinghua.edu.cn/rydw/qzjs/makaisheng.htm">Prof. Kaisheng Ma</a>. I am also a compiler team member and chip architect at Polar Bear Technologies, working with <a class="link-highlight" href="https://www.zhanhongtan.com/">Dr. Zhanhong Tan</a>.</p>
+                            <p class="mb-4">I am a first-year Ph.D. student at <a class="link-highlight" href="https://group.iiis.tsinghua.edu.cn/~maks/"><img class="institution-icon" src="assets/organizations/archiplab.png" alt="" aria-hidden="true">ArchipLab</a>, <a class="link-highlight" href="https://iiis.tsinghua.edu.cn/"><img class="institution-icon" src="assets/organizations/iiis.png" alt="" aria-hidden="true">Institute for Interdisciplinary Information Sciences (IIIS)</a>, <a class="link-highlight" href="https://www.tsinghua.edu.cn/"><img class="institution-icon" src="assets/schools/tsinghua-slide.png" alt="" aria-hidden="true">Tsinghua University</a>, advised by <a class="link-highlight" href="https://iiis.tsinghua.edu.cn/rydw/qzjs/makaisheng.htm">Prof. Kaisheng Ma</a>. I am also a compiler team member and chip architect at <a class="link-highlight" href="https://www.qcc.com/firm/d4d630cc907d3109a41e35917a45f589.html"><img class="institution-icon" src="assets/organizations/polar-bear.png" alt="" aria-hidden="true">Polar Bear Technologies</a>, working with <a class="link-highlight" href="https://www.zhanhongtan.com/">Dr. Zhanhong Tan</a>.</p>
                             <p>Previously, I earned my B.Eng. in Microelectronics from <a class="link-highlight" href="https://www.fudan.edu.cn/"><img class="institution-icon" src="assets/schools/fudan-slide.png" alt="" aria-hidden="true">Fudan University</a>. Most formatively, I worked on <span class="research-area">computer architecture and hardware design</span> at <a class="link-highlight" href="https://www.sqz.ac.cn/"><img class="institution-icon" src="assets/organizations/qizhi-slide.png" alt="" aria-hidden="true">Shanghai Qi Zhi Institute</a> with <a class="link-highlight" href="https://people.iiis.tsinghua.edu.cn/~gaomy/">Prof. Mingyu Gao</a>, and <span class="research-area">AI algorithms and systems</span> at <a class="link-highlight" href="https://cei.pratt.duke.edu/"><img class="institution-icon" src="assets/organizations/duke-slide.png" alt="" aria-hidden="true">Duke CEI Center</a> with <a class="link-highlight" href="https://ece.duke.edu/people/yiran-chen/">Prof. Yiran Chen</a> and <a class="link-highlight" href="https://guocong.me/">Dr. Cong Guo</a>. At Fudan, I also explored <span class="research-area">AI algorithms</span> with <a class="link-highlight" href="https://viplab.fudan.edu.cn/about.html">Prof. Yibo Fan</a>, <span class="research-area">electronic design automation</span> with <a class="link-highlight" href="https://ephonic.github.io/">Prof. Fan Yang</a>, and <span class="research-area">hardware design</span> with <a class="link-highlight" href="https://icmne.fudan.edu.cn/2c/af/c48925a732335/page.htm">Prof. Jun Han</a>, completing my undergraduate thesis on <span class="research-area">architecture-aware compiler optimization</span> under the guidance of <a class="link-highlight" href="https://cihlab.github.io/cxchen.html">Prof. Chixiao Chen</a>.</p>
                         </div>
                     </section>
@@ -224,7 +249,7 @@
                                 <div>
                                 <div class="experience-header">
                                     <div>
-                                        <h3 class="text-xl font-sans font-semibold text-primary">Polar Bear Technologies</h3>
+                                        <h3 class="text-xl font-sans font-semibold text-primary"><a class="link-highlight" href="https://www.qcc.com/firm/d4d630cc907d3109a41e35917a45f589.html"><span class="experience-company-link">Polar Bear Technologies</span></a></h3>
                                         <p class="experience-advisor"><span class="experience-role">Compiler Team Member &amp; Chip Architect</span> <span class="experience-advisor-group"><span class="experience-separator" aria-hidden="true">|</span> Advisor: <a class="link-highlight" href="https://www.zhanhongtan.com/">Dr. Zhanhong Tan</a></span></p>
                                     </div>
                                     <div class="experience-meta"><span><i class="fas fa-location-dot" aria-hidden="true"></i> Beijing</span><time>Mar. 2026 – Present</time></div>
@@ -313,7 +338,8 @@
 
     <script src="script.js?v=20261010-contact-topics"></script>
     <script defer src="assets/signature/engine.js"></script>
-    <script defer src="assets/signature/brand.js?v=20261011-bilingual-brand"></script>
+    <script defer src="assets/signature/brand.js?v=20261011-signature-navy"></script>
+    <script defer src="assets/signature/font-preview.js?v=20261011-signature-navy"></script>
     <script defer src="assets/visit.js"></script>
 </body>
 </html>

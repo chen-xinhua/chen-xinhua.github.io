@@ -1,26 +1,40 @@
 // 签名书写引擎：按像素计算每一点墨迹的出现时间，交叉处不会提前露出其他笔画
+// 签名书写引擎：按像素计算每一点墨迹的出现时间，交叉处不会提前露出其他笔画
 function SigEngine(canvas, opt) {
   const VX = opt.view[0], VY = opt.view[1], VW = opt.view[2], VH = opt.view[3];
   const SOFT = 14, FADE = 800;
-  const inkPath = new Path2D(opt.ink), iniPath = opt.ini ? new Path2D(opt.ini) : null;
+  // 墨迹路径的坐标变换，默认是 potrace 输出的（y 轴翻转、缩小 10 倍）
+  const INK_T = opt.inkTransform || [.1, 0, 0, -.1, 0, 410];
+  // 也可以用 inks: [{ d, t }] 传入多段墨迹，各自带坐标变换（例如英文和中文合在一张画布上）
+  const INKS = (opt.inks || [{ d: opt.ink, t: INK_T }]).map(k => ({ path: new Path2D(k.d), t: k.t || INK_T }));
+  const inkPath = INKS[0].path, iniPath = opt.ini ? new Path2D(opt.ini) : null;
   const ctx = canvas.getContext('2d');
-  let W = 0, H = 0, s = 1, alpha = null, idx = null, T = null, T2 = null, CV = null, img = null, iniImg = null;
+  let W = 0, H = 0, s = 1, TX = 0, TY = 0, alpha = null, idx = null, T = null, T2 = null, CV = null, img = null, iniImg = null;
   let strokes = [], color = [27, 26, 24];
   const api = { total: 0, ends: [], starts: [] };
 
   function rasterize(path) {
     const c = document.createElement('canvas'); c.width = W; c.height = H;
     const g = c.getContext('2d');
-    g.setTransform(s, 0, 0, s, -VX * s, -VY * s); g.translate(0, 410); g.scale(.1, -.1);
-    g.fill(path);
+    for (const k of path === inkPath ? INKS : [{ path, t: INK_T }]) {
+      g.setTransform(s, 0, 0, s, TX, TY); g.transform(...k.t);
+      g.fill(k.path);
+    }
     const d = g.getImageData(0, 0, W, H).data, a = new Uint8Array(W * H);
     for (let i = 0; i < a.length; i++) a[i] = d[i * 4 + 3];
     return a;
   }
   function resize() {
     const r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-    W = Math.max(1, Math.round(r.width * dpr)); H = Math.max(1, Math.round(W * VH / VW));
-    canvas.width = W; canvas.height = H; s = W / VW;
+    W = Math.max(1, Math.round(r.width * dpr));
+    if (opt.layout) {
+      // 由调用方决定缩放和位置（例如按页面字号和基线对齐），画布高度沿用页面上的高度
+      H = Math.max(1, Math.round(r.height * dpr));
+      ({ s, tx: TX, ty: TY } = opt.layout(W, H, dpr));
+    } else {
+      H = Math.max(1, Math.round(W * VH / VW)); s = W / VW; TX = -VX * s; TY = -VY * s;
+    }
+    canvas.width = W; canvas.height = H;
     alpha = rasterize(inkPath);
     const list = []; for (let i = 0; i < alpha.length; i++) if (alpha[i]) list.push(i);
     idx = Uint32Array.from(list);
@@ -97,7 +111,7 @@ function SigEngine(canvas, opt) {
   function compute() {
     if (!W || !strokes.length) return;
     // 1. 按 1 个单位间距采样中心线，时间在第 2 步按运笔速度计算
-    const P = [], ranges = [], SI = [], meta = [];
+    const P = [], ranges = [], SI = [], meta = [], RF = [];
     strokes.forEach((st, si) => {
       st.parts.forEach((pts, pi) => {
         const r0 = P.length / 3;
@@ -106,9 +120,10 @@ function SigEngine(canvas, opt) {
           for (let k = 0; k < n; k++) {
             const f = k / n;
             P.push(pts[i-1][0] + (pts[i][0] - pts[i-1][0]) * f, pts[i-1][1] + (pts[i][1] - pts[i-1][1]) * f, 0);
+            RF.push(pts[i][2] || 0);   // 第三项是指定的半宽（细线），没有则按墨迹宽度
           }
         }
-        const e = pts[pts.length - 1]; P.push(e[0], e[1], 0);
+        const e = pts[pts.length - 1]; P.push(e[0], e[1], 0); RF.push(e[2] || 0);
         ranges.push([r0, P.length / 3]); meta.push({ si, pi });
         while (SI.length < P.length / 3) SI.push(si);
       });
@@ -117,7 +132,7 @@ function SigEngine(canvas, opt) {
     // 2. 每个采样点处的笔画半宽
     const D = distField(), R = new Float32Array(n);
     for (let k = 0; k < n; k++) {
-      const px = Math.round((P[3*k] - VX) * s), py = Math.round((P[3*k+1] - VY) * s); let m = 0;
+      const px = Math.round(P[3*k] * s + TX), py = Math.round(P[3*k+1] * s + TY); let m = 0;
       for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
         const x = px + dx, y = py + dy; if (x >= 0 && y >= 0 && x < W && y < H) m = Math.max(m, D[y * W + x]);
       }
@@ -126,7 +141,7 @@ function SigEngine(canvas, opt) {
     timing(P, ranges, meta, R);
     // 每个采样点的法线方向，以及沿法线向左、向右到墨迹边缘的距离
     const NX = new Float32Array(n), NY = new Float32Array(n), WL = new Float32Array(n), WR = new Float32Array(n);
-    const inkAt = (x, y) => { const px = Math.round((x - VX) * s), py = Math.round((y - VY) * s); return px >= 0 && py >= 0 && px < W && py < H && alpha[py * W + px] > 110; };
+    const inkAt = (x, y) => { const px = Math.round(x * s + TX), py = Math.round(y * s + TY); return px >= 0 && py >= 0 && px < W && py < H && alpha[py * W + px] > 110; };
     for (const [a, b] of ranges) for (let k = a; k < b; k++) {
       const k0 = Math.max(a, k - 3), k1 = Math.min(b - 1, k + 3);
       let tx = P[3*k1] - P[3*k0], ty = P[3*k1+1] - P[3*k0+1]; const l = Math.hypot(tx, ty) || 1; tx /= l; ty /= l;
@@ -142,11 +157,11 @@ function SigEngine(canvas, opt) {
     const R2 = new Float32Array(n), BAND = new Uint8Array(n), BL = new Float32Array(n), BR = new Float32Array(n);
     // 另一笔的中心线从这一笔的墨迹里穿过的位置，也算交叉处
     const CG = 8, cg = new Map();
-    for (let k = 0; k < n; k++) { const key = Math.floor(P[3*k+1] / CG) * 200 + Math.floor(P[3*k] / CG); let c = cg.get(key); if (!c) cg.set(key, c = []); c.push(k); }
+    for (let k = 0; k < n; k++) { const key = Math.floor(P[3*k+1] / CG) * 4096 + Math.floor(P[3*k] / CG); let c = cg.get(key); if (!c) cg.set(key, c = []); c.push(k); }
     const crossed = k => {
       const x = P[3*k], y = P[3*k+1], gx = Math.floor(x / CG), gy = Math.floor(y / CG);
       for (let yy = gy - 1; yy <= gy + 1; yy++) for (let xx = gx - 1; xx <= gx + 1; xx++) {
-        const c = cg.get(yy * 200 + xx); if (!c) continue;
+        const c = cg.get(yy * 4096 + xx); if (!c) continue;
         for (const q of c) if (SI[q] !== SI[k] && Math.hypot(P[3*q] - x, P[3*q+1] - y) < R[k] + 1.5) return true;
       }
       return false;
@@ -155,7 +170,7 @@ function SigEngine(canvas, opt) {
     const selfNear = (k, a, b) => {
       const x = P[3*k], y = P[3*k+1], gx = Math.floor(x / CG), gy = Math.floor(y / CG);
       for (let yy = gy - 1; yy <= gy + 1; yy++) for (let xx = gx - 1; xx <= gx + 1; xx++) {
-        const c = cg.get(yy * 200 + xx); if (!c) continue;
+        const c = cg.get(yy * 4096 + xx); if (!c) continue;
         for (const q of c) if (SI[q] === SI[k] && Math.abs(q - k) > 25 && Math.hypot(P[3*q] - x, P[3*q+1] - y) < R[k] + 1.5) {
           // 原路折返的两段方向相反、位置重合，不算交叉
           const t1x = P[3*Math.min(k+2, n-1)] - P[3*Math.max(k-2, 0)], t1y = P[3*Math.min(k+2, n-1)+1] - P[3*Math.max(k-2, 0)+1];
@@ -185,7 +200,7 @@ function SigEngine(canvas, opt) {
         for (let k = i; k < j; k++) {
           const K = a + k, x = P[3*K], y = P[3*K+1], gx = Math.floor(x / CG), gy = Math.floor(y / CG);
           for (let yy = gy - 2; yy <= gy + 2; yy++) for (let xx = gx - 2; xx <= gx + 2; xx++) {
-            const c = cg.get(yy * 200 + xx); if (!c) continue;
+            const c = cg.get(yy * 4096 + xx); if (!c) continue;
             for (const q of c) {
               if (SI[q] === SI[K]) continue;
               const dx = P[3*q] - x, dy = P[3*q+1] - y, along = Math.abs(dx * NY[K] - dy * NX[K]), lat = dx * NX[K] + dy * NY[K];
@@ -214,6 +229,7 @@ function SigEngine(canvas, opt) {
         i = j;
       }
       for (let k = a; k < b; k++) {
+        if (RF[k] > 0) { R2[k] = RF[k] + 0.35; BAND[k] = 0; continue; }
         let r = loc[k - a];
         if (k - a < 3 || b - 1 - k < 3) r *= 0.9;
         R2[k] = r + 0.35;
@@ -223,7 +239,7 @@ function SigEngine(canvas, opt) {
     // 3. 网格加速。规则：
     //    落在某笔笔宽圆盘内的像素，取经过它的最早时间；圆盘边缘按覆盖比例半透明，避免切口锯齿；
     //    其余部分（交叉处堆积的墨、笔端多出的墨）等附近所有笔画都经过后再出现。
-    const C = 14, GW = Math.ceil(820 / C), cells = new Map();
+    const C = 14, GW = 4096, cells = new Map();
     for (let k = 0; k < n; k++) {
       const key = Math.floor(P[3*k+1] / C) * GW + Math.floor(P[3*k] / C);
       let a = cells.get(key); if (!a) cells.set(key, a = []); a.push(k);
@@ -231,7 +247,7 @@ function SigEngine(canvas, opt) {
     T = new Float32Array(idx.length); T2 = new Float32Array(idx.length); CV = new Float32Array(idx.length);
     const cand = [], half = 0.5 / s;
     for (let j = 0; j < idx.length; j++) {
-      const i = idx[j], x = VX + (i % W + .5) / s, y = VY + ((i / W | 0) + .5) / s;
+      const i = idx[j], x = (i % W + .5 - TX) / s, y = ((i / W | 0) + .5 - TY) / s;
       const cx = Math.floor(x / C), cy = Math.floor(y / C);
       let best = Infinity, bestS = -1, near = Infinity, nearT = Infinity;
       cand.length = 0;
