@@ -188,6 +188,25 @@ body[data-brand-font="pacifico"] .signature-brand-name { font-family: 'Pacifico'
 }
 
 .profile-name-divider { color: #94a3b8; font-weight: 400; }
+.swap-nav-name {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .32em;
+    color: #1e293b;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.swap-nav-name .profile-name-divider { font-weight: 400; }
+.profile-card .profile-image-container { margin-bottom: .5rem; }
+.swap-profile-name { display: flex; justify-content: center; align-items: center; min-height: 70px; margin: 0; }
+.swap-profile-name .signature-brand { height: 70px; transform-origin: center; }
+.swap-profile-name .signature-brand:not(.is-animated) .signature-brand-name { visibility: visible; }
+.swap-profile-name .signature-brand:not(.is-animated) .signature-brand-ink img { opacity: 1; }
+.profile-card .profile-portrait { object-position: 44% center; }
 .profile-card { container-type: inline-size; min-width: 0; }
 .profile-slogan { margin: 1rem auto 0; color: #20757c; font-size: clamp(.75rem, 4.17cqi, .9375rem); line-height: 1.65; font-weight: 500; letter-spacing: -.015em; white-space: nowrap; }
 .research-direction-tags {
@@ -286,6 +305,14 @@ section {
     #honors { order: 7; }
     #outreach { order: 8; margin-top: 0; }
     #contact { order: 9; }
+}
+
+@media (max-width: 639px) {
+    .swap-nav-name { font-size: clamp(1rem, 5vw, 1.25rem); }
+}
+
+@media (max-width: 375px) {
+    .swap-profile-name .signature-brand { transform: scale(.84); }
 }
 
 @media (min-width: 1024px) {

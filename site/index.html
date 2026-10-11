@@ -9,22 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/tailwind.css?v=20261011-bilingual-brand">
-    <link rel="stylesheet" href="styles.css?v=20261011-signature-navy">
+    <link rel="stylesheet" href="styles.css?v=20261011-swapped-name">
 </head>
 <body class="bg-background text-foreground antialiased font-sans" data-brand-font="dancing">
     <nav class="top-nav glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="nav-container max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 xl:h-20">
                 <div class="flex-shrink-0">
-                    <a href="#" class="signature-brand is-lockup-pending" aria-label="Xinhua Chen, back to top">
-                        <span class="signature-brand-name" aria-hidden="true">Xinhua Chen</span>
-                        <canvas class="signature-brand-name-canvas" aria-hidden="true"></canvas>
-                        <span class="signature-brand-ink" aria-hidden="true">
-                            <img src="assets/signature/signature.svg?v=20261011-signature-navy" alt="" width="800" height="380">
-                            <canvas></canvas>
-                        </span>
-                        <canvas class="signature-brand-lockup-canvas" aria-hidden="true"></canvas>
-                    </a>
+                    <a href="#" class="swap-nav-name" aria-label="Xinhua Chen, back to top">Xinhua Chen <span class="profile-name-divider">|</span> <span lang="zh">陈欣骅</span></a>
                 </div>
 
                 <div class="hidden xl:block">
@@ -95,11 +87,21 @@
                 <div class="profile-column">
                     <div class="profile-card">
                         <div class="profile-image-container mb-6 mx-auto max-w-[180px]">
-                            <img src="assets/profile.jpeg" alt="Xinhua Chen in graduation attire" class="profile-portrait w-full rounded-xl shadow-sm" width="220" height="260">
+                            <img src="assets/profile.jpeg?v=20261011-new-portrait" alt="Xinhua Chen in graduation attire" class="profile-portrait w-full rounded-xl shadow-sm" width="220" height="260">
                         </div>
 
                         <div class="text-center mb-6">
-                            <h1 class="text-2xl font-sans font-semibold text-primary mb-2">Xinhua Chen <span class="profile-name-divider">|</span> <span lang="zh">陈欣骅</span></h1>
+                            <h1 class="swap-profile-name" aria-label="Xinhua Chen | 陈欣骅">
+                                <a href="#" class="signature-brand is-lockup-pending" aria-label="Xinhua Chen, back to top">
+                                    <span class="signature-brand-name" aria-hidden="true">Xinhua Chen</span>
+                                    <canvas class="signature-brand-name-canvas" aria-hidden="true"></canvas>
+                                    <span class="signature-brand-ink" aria-hidden="true">
+                                        <img src="assets/signature/signature.svg?v=20261011-signature-navy" alt="" width="800" height="380">
+                                        <canvas></canvas>
+                                    </span>
+                                    <canvas class="signature-brand-lockup-canvas" aria-hidden="true"></canvas>
+                                </a>
+                            </h1>
                             <p class="text-lg text-accent font-medium mb-1">Ph.D. Student</p>
                             <p class="text-neutral-600 mb-2">IIIS, Tsinghua University</p>
                             <p class="profile-slogan">Build systems, share knowledge, pave the way.</p>
