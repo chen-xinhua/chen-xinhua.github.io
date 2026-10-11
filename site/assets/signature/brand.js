@@ -8,7 +8,8 @@
       return response.json();
     })
     .then(({ ink, strokes }) => {
-      const canvas = brand.querySelector('canvas');
+      const inkMark = brand.querySelector('.signature-brand-ink');
+      const canvas = inkMark.querySelector('canvas');
       const engine = SigEngine(canvas, { view: [10, 14, 800, 380], ink, ini: '' });
       engine.setStrokes(strokes);
       engine.setColor([30, 41, 59]);
@@ -39,7 +40,7 @@
       new ResizeObserver(() => {
         engine.resize();
         engine.draw(current);
-      }).observe(brand);
+      }).observe(inkMark);
     })
     .catch(() => {
       // Keep the static SVG visible if the animation cannot load.

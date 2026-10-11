@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kaushan+Script&display=swap');
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
@@ -38,15 +38,32 @@ a {
 }
 
 .signature-brand {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 64px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.signature-brand-name {
+    color: #1e293b;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 27px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.signature-brand-ink {
     position: relative;
-    width: 150px;
-    height: 71px;
+    display: block;
+    width: 100px;
+    height: 48px;
     flex-shrink: 0;
 }
 
-.signature-brand img,
-.signature-brand canvas {
+.signature-brand-ink img,
+.signature-brand-ink canvas {
     position: absolute;
     inset: 0;
     display: block;
@@ -63,7 +80,8 @@ a {
 }
 
 @media (max-width: 1023px) {
-    .signature-brand { width: 124px; height: 59px; }
+    .signature-brand-name { font-size: 22px; }
+    .signature-brand-ink { width: 84px; height: 40px; }
 }
 
 .nav-links {

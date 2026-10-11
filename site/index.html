@@ -8,21 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/tailwind.css">
-    <link rel="stylesheet" href="styles.css?v=20261011-signature-align">
+    <link rel="stylesheet" href="assets/tailwind.css?v=20261011-bilingual-brand">
+    <link rel="stylesheet" href="styles.css?v=20261011-bilingual-brand">
 </head>
 <body class="bg-background text-foreground antialiased font-sans">
     <nav class="top-nav glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="nav-container max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 lg:h-20">
+            <div class="flex justify-between items-center h-16 xl:h-20">
                 <div class="flex-shrink-0">
                     <a href="#" class="signature-brand" aria-label="Xinhua Chen, back to top">
-                        <img src="assets/signature/signature.svg" alt="" width="800" height="380">
-                        <canvas aria-hidden="true"></canvas>
+                        <span class="signature-brand-name" aria-hidden="true">Xinhua Chen</span>
+                        <span class="signature-brand-ink" aria-hidden="true">
+                            <img src="assets/signature/signature.svg" alt="" width="800" height="380">
+                            <canvas></canvas>
+                        </span>
                     </a>
                 </div>
 
-                <div class="hidden lg:block">
+                <div class="hidden xl:block">
                     <div class="ml-10 flex items-center space-x-8">
                         <ul class="nav-links flex">
                             <li><a href="#about" class="nav-item">About</a></li>
@@ -38,14 +41,14 @@
                     </div>
                 </div>
 
-                <div class="lg:hidden flex items-center">
+                <div class="xl:hidden flex items-center">
                     <button class="mobile-menu-btn p-2 rounded-md text-neutral-600 hover:text-primary" aria-label="Toggle navigation" aria-controls="mobile-menu" aria-expanded="false">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="mobile-menu hidden lg:hidden absolute top-16 left-0 w-full bg-white/95 backdrop-blur-md border-b border-neutral-200 shadow-lg" id="mobile-menu">
+            <div class="mobile-menu hidden xl:hidden absolute top-16 left-0 w-full bg-white/95 backdrop-blur-md border-b border-neutral-200 shadow-lg" id="mobile-menu">
                 <ul class="flex flex-col py-4 px-4 space-y-4">
                     <li><a href="#about" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">About</a></li>
                     <li><a href="#research-thrust" class="mobile-nav-item block text-neutral-600 hover:text-primary font-medium">Research</a></li>
@@ -310,7 +313,7 @@
 
     <script src="script.js?v=20261010-contact-topics"></script>
     <script defer src="assets/signature/engine.js"></script>
-    <script defer src="assets/signature/brand.js?v=20261011-speed2"></script>
+    <script defer src="assets/signature/brand.js?v=20261011-bilingual-brand"></script>
     <script defer src="assets/visit.js"></script>
 </body>
 </html>
