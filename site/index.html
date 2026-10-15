@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/tailwind.css?v=20261011-bilingual-brand">
     <link rel="stylesheet" href="styles.css?v=20261011-swapped-name">
+    <link rel="preload" href="assets/profile.jpeg?v=20261015-optimized" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/signature/lockup.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="assets/signature/data.json" as="fetch" crossorigin="anonymous">
+    <script defer src="assets/signature/engine.js"></script>
+    <script defer src="assets/signature/brand.js?v=20261015-faster"></script>
 </head>
 <body class="bg-background text-foreground antialiased font-sans" data-brand-font="dancing">
     <nav class="top-nav glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -87,7 +92,7 @@
                 <div class="profile-column">
                     <div class="profile-card">
                         <div class="profile-image-container mb-6 mx-auto max-w-[180px]">
-                            <img src="assets/profile.jpeg?v=20261011-new-portrait" alt="Xinhua Chen in graduation attire" class="profile-portrait w-full rounded-xl shadow-sm" width="220" height="260">
+                            <img src="assets/profile.jpeg?v=20261015-optimized" alt="Xinhua Chen in graduation attire" class="profile-portrait w-full rounded-xl shadow-sm" width="220" height="260" loading="eager" decoding="async" fetchpriority="high">
                         </div>
 
                         <div class="text-center mb-6">
@@ -339,8 +344,6 @@
     </footer>
 
     <script src="script.js?v=20261010-contact-topics"></script>
-    <script defer src="assets/signature/engine.js"></script>
-    <script defer src="assets/signature/brand.js?v=20261011-signature-navy"></script>
     <script defer src="assets/signature/font-preview.js?v=20261011-signature-navy"></script>
     <script defer src="assets/visit.js"></script>
 </body>

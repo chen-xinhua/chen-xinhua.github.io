@@ -2,7 +2,11 @@
   const brand = document.querySelector('.signature-brand');
   const englishCanvas = brand?.querySelector('.signature-brand-name-canvas');
   const chineseCanvas = brand?.querySelector('.signature-brand-ink canvas');
-  if (!brand || !englishCanvas || !chineseCanvas || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!brand || !englishCanvas || !chineseCanvas) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    brand.classList.remove('is-lockup-pending');
+    return;
+  }
 
   Promise.all([
     fetch('assets/signature/lockup.json').then(response => {
@@ -31,7 +35,7 @@
       let frame = 0;
       let replayTimer;
       let current = -1;
-      const rate = 2;
+      const rate = 3;
       const handoff = 120;
       const englishEnd = english.total;
       const chineseStart = englishEnd + handoff;
@@ -47,7 +51,7 @@
           chineseEngine.draw(chineseEngine.total + 20);
           return;
         }
-        const start = performance.now() + 300;
+        const start = performance.now();
         current = -1;
         const step = now => {
           current = (now - start) * rate;
@@ -59,9 +63,18 @@
       }
 
       play();
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) play();
+      });
       document.querySelector('.brand-font-picker')?.addEventListener('brand:replay', play);
       let resizeTimer;
-      new ResizeObserver(() => {
+      let observedWidth = brand.getBoundingClientRect().width;
+      let observedHeight = brand.getBoundingClientRect().height;
+      new ResizeObserver(entries => {
+        const { width, height } = entries[0].contentRect;
+        if (Math.abs(width - observedWidth) < 0.5 && Math.abs(height - observedHeight) < 0.5) return;
+        observedWidth = width;
+        observedHeight = height;
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           english.resize();
