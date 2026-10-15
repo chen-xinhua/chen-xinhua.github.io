@@ -25,8 +25,16 @@ jobs:
           path: site/data/citations.json
           key: scholar-${{ github.run_id }}
           restore-keys: scholar-
+      - name: Restore last visit snapshot
+        uses: actions/cache@v4
+        with:
+          path: site/data/visits.json
+          key: visits-${{ github.run_id }}
+          restore-keys: visits-
       - name: Refresh Scholar statistics
         run: python3 .github/update-citations.py --keep-on-error
+      - name: Refresh visit count snapshot
+        run: python3 .github/update-visits.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

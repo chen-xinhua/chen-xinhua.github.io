@@ -5,6 +5,25 @@
   if (!endpoint.startsWith('https://')) return;
 
   const count = document.getElementById('visit-count');
+  let displayedTotal = null;
+  function displayTotal(total, source, updatedAt) {
+    if (!Number.isSafeInteger(total) || total < 0 || !count) return;
+    if (displayedTotal !== null && total < displayedTotal) return;
+    displayedTotal = total;
+    count.textContent = total.toLocaleString('en-US');
+    count.title = source === 'snapshot' && updatedAt
+      ? `Last updated ${new Date(updatedAt).toLocaleString()}`
+      : 'Live visit count';
+  }
+
+  const snapshot = count ? fetch('/data/visits.json', { cache: 'no-cache' })
+    .then(response => {
+      if (!response.ok) throw new Error('Count snapshot unavailable');
+      return response.json();
+    })
+    .then(({ total, updatedAt }) => displayTotal(total, 'snapshot', updatedAt))
+    .catch(() => {}) : Promise.resolve();
+
   async function showTotal() {
     if (!count) return;
     try {
@@ -16,9 +35,10 @@
       if (!response.ok) throw new Error('Count unavailable');
       const { total } = await response.json();
       if (!Number.isSafeInteger(total) || total < 0) throw new Error('Invalid count');
-      count.textContent = total.toLocaleString('en-US');
+      displayTotal(total, 'live');
     } catch {
-      count.textContent = '—';
+      await snapshot;
+      if (displayedTotal === null) count.textContent = '—';
     }
   }
 
