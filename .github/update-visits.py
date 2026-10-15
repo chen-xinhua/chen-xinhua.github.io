@@ -3,6 +3,7 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 
@@ -23,5 +24,8 @@ try:
         encoding="utf-8",
     )
     print(f"Updated visit snapshot: {total}")
+except HTTPError as error:
+    detail = error.read(300).decode("utf-8", errors="replace").replace("\n", " ")
+    print(f"Keeping previous visit snapshot: HTTP {error.code}, {detail}")
 except Exception as error:
     print(f"Keeping previous visit snapshot: {error}")
