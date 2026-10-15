@@ -11,7 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "site" / "data" / "visits.json"
 REQUEST = Request(
     "https://xinhua-visitor-tracker.pages.dev/total",
-    headers={"Origin": "https://chen-xinhua.github.io"},
+    headers={
+        "Origin": "https://chen-xinhua.github.io",
+        "User-Agent": "XinhuaVisitSnapshot/1.0 (+https://chen-xinhua.github.io)",
+        "Accept": "application/json",
+    },
 )
 
 try:
